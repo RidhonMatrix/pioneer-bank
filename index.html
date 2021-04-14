@@ -1,1 +1,128 @@
-{\rtf1}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-area" >
+        <h1 class="text-center">Welcome to Pioneer Bank</h1>
+        <div class="submit-area">
+            <h4>Login</h4>
+            <input type="text" class="form-control" placeholder="Email" name="" id="login-email">
+            <br>
+            <input type="password" placeholder="Password" class="form-control" name="" id="login-password">
+            <br>
+            <button id="login" class="btn btn-success">Enter</button>
+            
+        </div>
+    </div>
+
+    <div id="transaction-area">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit">
+                    <h5>Deposit</h5>
+                    <h2>$<span id="deposit-amount">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw">
+                    <h5>Withdraw</h5>
+                    <h2>$<span id="withdraw-amount">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance">
+                    <h5>Balance</h5>
+                    <h2>$<span id="balance-amount">1240</span></h2>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="deposit-enter">
+                    <h5>Deposit</h5>
+                    <input id="deposit-input" type="text" class="form-control" placeholder="$ amount you want to deposit" name="" id="">
+                    <br>
+                    <button id="deposit-button" class="btn btn-success">Doposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="withdraw-enter">
+                    <h5>Withdraw</h5>
+                    <input id="withdraw-input" type="text" class="form-control" placeholder="$ amount you want to withdraw" name="" id="">
+                    <br>
+                    <button id="withdraw-button" class="btn btn-success">Withdraw</button>
+                </div> 
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        //set default password
+        const realEmail="admin@email.com";
+        const realPassword="admin";
+        document.getElementById('login-email').value=realEmail;
+        document.getElementById('login-password').value=realPassword;
+        
+        function authorization(emailId,passwordId){
+            const email=document.getElementById(emailId).value;
+            const password=document.getElementById(passwordId).value;
+
+            if(email==realEmail && password==realPassword){
+                const loginArea = document.getElementById('login-area');
+                loginArea.style.display="none";
+                const transactionArea = document.getElementById('transaction-area')
+                transactionArea.style.display="block";
+            }
+            else if(email!=realEmail){
+                window.alert("Email doesn't exist!");
+            }
+            else{
+                window.alert("Wrong Password!");
+            }
+        }
+
+        const loginbtn=document.getElementById('login');
+        loginbtn.addEventListener('click',function(event){
+            authorization('login-email','login-password');
+            
+        })
+        //deposit button event handler 
+        function updateSpanText(id,inputId,sign){
+            const current=parseFloat(document.getElementById(id).innerText);
+            const input=parseFloat(document.getElementById(inputId).value);        
+            
+            if(document.getElementById(inputId).value==""){
+                return; //for avoiding NaN value
+            }
+            
+            if(sign=='+'){
+                document.getElementById(id).innerText=(current+input);
+            }
+            else if(sign=='-'){
+                document.getElementById(id).innerText=(current-input);
+            }
+        }
+        document.getElementById('deposit-button').addEventListener('click',function(event){
+
+            updateSpanText("deposit-amount","deposit-input",'+');
+            updateSpanText("balance-amount","deposit-input",'+');
+            document.getElementById("deposit-input").value="";  //empty after input a value
+        })
+        //withdraw button event handler
+        document.getElementById('withdraw-button').addEventListener('click',function(event){
+            updateSpanText("withdraw-amount","withdraw-input",'+');
+            updateSpanText("balance-amount","withdraw-input",'-');
+            document.getElementById("withdraw-input").value="";  //empty after input a value
+        })
+    </script>
+</body>
+</html>
