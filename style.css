@@ -1,5 +1,6 @@
 body{
     padding: 100px;
+    background-color: #6B5B95;
 }
 
 .submit-area{
@@ -7,6 +8,7 @@ body{
     padding: 40px;
     box-shadow: 5px 5px 10px gray;
     border-radius: 10px;
+    background-color: #88B04B;
     
 }
 #transaction-area{
@@ -33,6 +35,12 @@ body{
     box-shadow: 5px 5px 10px gray;
     border-radius: 10px;
     padding: 20px;
-
-
+    background-color: #88B04B;
+}
+.text-center{
+    background-color:#88B04B;
+    border-radius: 10px;
+    color: black;
+    padding: 10px;
+    
 }
